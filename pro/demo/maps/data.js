@@ -40,7 +40,7 @@ data = {
                 facader:2,
                 projector:3,
                 customer:3,
-                coordinates: [55.7, 37.2]
+                coordinates: [55.7, 37.5]
             }
     }
 };
