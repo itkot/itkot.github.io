@@ -34,7 +34,7 @@ data = {
             projector:3,
             customer:3,
             coordinates: [55.8, 37.7]
-        }
+        },
         4:
             {
                 facader:2,
