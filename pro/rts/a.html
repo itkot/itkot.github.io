@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A</title>
+    <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+    <style>
+        video{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<span id="id"></span>
+<br>
+
+<video id="video"></video>
+
+</body>
+<script>
+
+    peer = new Peer(null, {
+        debug: 2
+    });
+
+    peer.on('open', function (id) {
+        if (peer.id === null) {
+            console.log('Received null id from peer open');
+            peer.id = lastPeerId;
+        } else {
+            lastPeerId = peer.id;
+        }
+
+        console.log('ID: ' + peer.id);
+        document.getElementById('id').innerText = 'ID: ' + peer.id;
+    });
+
+
+
+    peer.on('call', function(call) {
+        console.log(call);
+        // getUserMedia({video: true, audio: true}, function(stream) {
+
+
+        // var getUserMedia;
+        // var browserUserMedia =	navigator.webkitGetUserMedia	||	// WebKit
+        //     navigator.mozGetUserMedia	||	// Mozilla FireFox
+        //     navigator.getUserMedia;			// 2013...
+        // if ( !browserUserMedia ) throw 'Your browser doesn\'t support WebRTC';
+        //
+        // getUserMedia = browserUserMedia.bind( navigator );
+        //
+        // getUserMedia(
+        //     {
+        //         audio: true,
+        //         video: true
+        //     },
+        //     function( stream ) {
+        //         console.log( stream );
+        //         call.answer(stream); // Answer the call with an A/V stream.
+        //
+        //     },
+        //     function( err ) {
+        //         console.log( err );
+        //     }
+        // );
+
+                 call.answer(); // Answer the call with an A/V stream.
+
+
+             call.on('stream', function(remoteStream) {
+                 console.log(remoteStream);
+                 console.log('remoteStream');
+
+                 var videoElement = document.getElementById( 'video' );
+                 try {
+                     videoElement.srcObject = remoteStream;
+                 } catch (error) {
+                     videoElement.src = window.URL.createObjectURL(remoteStream);
+                 }
+                 // Show stream in some video/canvas element.
+             });
+
+    });
+
+
+
+
+</script>
+
+</html>

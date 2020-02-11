@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>B</title>
+    <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+</head>
+<body>
+<input type="text" id="id">
+<!--<button onclick="connect()">connect</button>-->
+<button onclick="call()">call</button>
+</body>
+
+<script>
+    peer = new Peer(null, {
+        debug: 2
+    });
+
+    connect = function(){
+        console.log('connecting');
+        var conn = peer.connect(document.getElementById('id').value);
+        // on open will be launch when you successfully connect to PeerServer
+        conn.on('open', function(){
+            // here you have conn.id
+            conn.send('hi!');
+            console.log('connected');
+        });
+    }
+
+    call = function(){
+        // var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+        // console.log(getUserMedia);
+        // getUserMedia({video: true, audio: true}, function(stream) {
+        //     var call = peer.call(document.getElementById('id').value, stream);
+        //     call.on('stream', function(remoteStream) {
+        //         // Show stream in some video/canvas element.
+        //     });
+        // }, function(err) {
+        //     console.log('Failed to get local stream' ,err);
+        // });
+
+
+
+
+        var getUserMedia;
+        var browserUserMedia =	navigator.webkitGetUserMedia	||	// WebKit
+            navigator.mozGetUserMedia	||	// Mozilla FireFox
+            navigator.getUserMedia;			// 2013...
+        if ( !browserUserMedia ) throw 'Your browser doesn\'t support WebRTC';
+
+        getUserMedia = browserUserMedia.bind( navigator );
+
+        getUserMedia(
+            {
+                audio: true,
+                video: true
+            },
+            function( stream ) {
+                console.log( stream );
+
+                var call = peer.call(document.getElementById('id').value, stream);
+                call.on('stream', function(remoteStream) {
+                    // Show stream in some video/canvas element.
+                });
+
+            },
+            function( err ) {
+                console.log( err );
+            }
+        );
+    }
+
+</script>
+</html>
