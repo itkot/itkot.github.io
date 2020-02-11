@@ -70,5 +70,11 @@
         );
     }
 
+    peer.on('disconnected', function () {
+        console.log('Connection lost. Please reconnect');
+
+        // Workaround for peer.reconnect deleting previous id
+    });
+
 </script>
 </html>

@@ -14,7 +14,7 @@
 <span id="id"></span>
 <br>
 
-<video id="video"></video>
+<video id="video" autoplay></video>
 
 </body>
 <script>
@@ -81,6 +81,12 @@
                  // Show stream in some video/canvas element.
              });
 
+    });
+
+    peer.on('disconnected', function () {
+        console.log('Connection lost. Please reconnect');
+
+        // Workaround for peer.reconnect deleting previous id
     });
 
 
