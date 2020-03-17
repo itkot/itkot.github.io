@@ -21,7 +21,8 @@ function login() {
     localStorage.setItem("login", this.loginText.val());
     localStorage.setItem("pwd", this.passwordText.val());
 
-    socket = new JsSIP.WebSocketInterface("wss://83.97.104.204:8088/ws");
+    //socket = new JsSIP.WebSocketInterface("wss://83.97.104.204:8088/ws");
+    socket = new JsSIP.WebSocketInterface("https://vision33.ru:8089/ws");
     _ua = new JsSIP.UA(
         {
             uri: "sip:" + this.loginText.val() + "@83.97.104.204",
