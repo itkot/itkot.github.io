@@ -32,10 +32,10 @@ function login() {
 
     //socket = new JsSIP.WebSocketInterface("wss://83.97.104.204:8088/ws");
    // socket = new JsSIP.WebSocketInterface("ws://pbx.vision33.ru/");
-    socket = new JsSIP.WebSocketInterface('wss://vision33.ru:8089');
+    socket = new JsSIP.WebSocketInterface(this.sockText.val());
     _ua = new JsSIP.UA(
         {
-            uri: "sip:" + this.loginText.val() + "@"+this.serverText.val(),
+            uri: "sip:" + this.loginText.val() + "@"+this.hostText.val(),
             password: this.passwordText.val(),
             display_name: this.loginText.val(),
             sockets: [socket]
