@@ -22,10 +22,10 @@ function login() {
     localStorage.setItem("pwd", this.passwordText.val());
 
     //socket = new JsSIP.WebSocketInterface("wss://83.97.104.204:8088/ws");
-    socket = new JsSIP.WebSocketInterface("https://pbx.vision33.ru/");
+    socket = new JsSIP.WebSocketInterface("ws://pbx.vision33.ru/");
     _ua = new JsSIP.UA(
         {
-            uri: "sip:" + this.loginText.val() + "@https://pbx.vision33.ru/",
+            uri: "sip:" + this.loginText.val() + "@ws://pbx.vision33.ru/",
             password: this.passwordText.val(),
             display_name: this.loginText.val(),
             sockets: [socket]
