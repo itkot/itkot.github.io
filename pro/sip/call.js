@@ -24,7 +24,7 @@ function login() {
 
     //socket = new JsSIP.WebSocketInterface("wss://83.97.104.204:8088/ws");
    // socket = new JsSIP.WebSocketInterface("ws://pbx.vision33.ru/");
-    socket = new JsSIP.WebSocketInterface(this.serverText.val());
+    socket = new JsSIP.WebSocketInterface('ws://pbx.vision33.ru/');
     _ua = new JsSIP.UA(
         {
             uri: "sip:" + this.loginText.val() + "@"+this.serverText.val(),
