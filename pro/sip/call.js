@@ -11,6 +11,7 @@ function loadPage() {
 function login() {
     console.log("on login");
     this.loginText = $("#loginText");
+    this.serverText = $("#serverText");
     this.passwordText = $("#passwordText");
     this.loginButton = $("#loginButton");
     this.logOutButton = $("#logOutButton");
