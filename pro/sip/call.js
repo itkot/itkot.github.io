@@ -3,6 +3,11 @@ function loadPage() {
 
     $("#loginText").val(localStorage.getItem("login"));
     $("#passwordText").val(localStorage.getItem("pwd"));
+    $("#sockText").val(localStorage.getItem("sock"));
+    $("#hostText").val(localStorage.getItem("host"));
+
+
+
     $("#callNumberText").val(localStorage.getItem("callNumber"));
 
     this._soundsControl = document.getElementById("sounds");
@@ -11,7 +16,8 @@ function loadPage() {
 function login() {
     console.log("on login");
     this.loginText = $("#loginText");
-    this.serverText = $("#serverText");
+    this.sockText = $("#sockText");
+    this.hostText = $("#hostText");
     this.passwordText = $("#passwordText");
     this.loginButton = $("#loginButton");
     this.logOutButton = $("#logOutButton");
@@ -21,6 +27,8 @@ function login() {
 
     localStorage.setItem("login", this.loginText.val());
     localStorage.setItem("pwd", this.passwordText.val());
+    localStorage.setItem("sock", this.sockText.val());
+    localStorage.setItem("host", this.hostText.val());
 
     //socket = new JsSIP.WebSocketInterface("wss://83.97.104.204:8088/ws");
    // socket = new JsSIP.WebSocketInterface("ws://pbx.vision33.ru/");
