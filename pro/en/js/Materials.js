@@ -13,7 +13,6 @@ Materials = new function() {
                 },
                 callBack
             )
-
     }
 
 

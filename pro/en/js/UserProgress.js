@@ -10,11 +10,18 @@ UserProgress = new function () {
         localStorage.setItem(dateKey, ++dailyScore)
 
         document.querySelector('#progressBar').style.width=dailyScore*10+"%";
+        var caption = document.querySelector('#progressBarCaption')
+        if (caption)
+            document.querySelector('#progressBarCaption').innerHTML = 'today: ' + dailyScore;
     }
 
     console.log(dailyScore)
 
     document.querySelector('#progressBar').style.width=dailyScore*10+"%";
+
+    var caption = document.querySelector('#progressBarCaption')
+    if (caption)
+        caption.innerHTML = 'today: ' + dailyScore;
 
     return this
 }

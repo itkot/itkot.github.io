@@ -61,7 +61,7 @@ Puzzle = new function () {
 
             if (answer == word) {
                 $('#success-screen').removeClass('d-none')
-                UserProgress.addPoint()
+                UserProgress.addPoint()//TODO вытащить наружу
             } else {
                 $('#fail-screen').removeClass('d-none')
             }
