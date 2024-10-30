@@ -55,6 +55,8 @@ $(document).ready(function () {
         })
     }
 
+    tests = []
+
     tests['quiz'] = function () {
         $.get('tests/quiz/main.html').done(function (data) {
             $('#test').html(data)
@@ -69,7 +71,14 @@ $(document).ready(function () {
                 options.sort(() => Math.random() - 0.5)
 
                 Quiz.render(options, translate, word)
-            })
+            },
+                function(i){
+                    document.querySelector('#loadScreen').classList.remove("d-none")
+                    document.querySelector('#mainScreen').classList.add("d-none")
+                    document.querySelector('#loadProgressBar').style.width= i + "%";
+                    console.log(i)
+                }
+            )
         })
     }
 
