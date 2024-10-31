@@ -19,7 +19,16 @@ $(document).ready(function () {
                 translate = words[word].trs[words[word].trs.length * Math.random() << 0]
 
                 Puzzle.render(word, translate, words[word].cefr, words[word].rating)
-            })
+                document.querySelector('#loadScreen').classList.add("d-none")
+                document.querySelector('#mainScreen').classList.remove("d-none")
+            },
+                function(i){
+                    document.querySelector('#loadScreen').classList.remove("d-none")
+                    document.querySelector('#mainScreen').classList.add("d-none")
+                    document.querySelector('#loadProgressBar').style.width= i + "%";
+                    console.log(i)
+                }
+            )
         })
     }
 
@@ -28,8 +37,6 @@ $(document).ready(function () {
             $('#test').html(data)
 
             Materials.getTOP10K(function (words) {
-                console.log(words)
-                
                 couples = {}
 
                 for (let i = 0; i < 100; i++) {//NASA like loop
@@ -42,8 +49,6 @@ $(document).ready(function () {
                         translate.length > 10)
                         continue;
 
-                    console.log(word, translate)
-
                     couples[word] = translate
 
                     if (Object.keys(couples).length >= 6)
@@ -51,11 +56,20 @@ $(document).ready(function () {
                 }
 
                 Couples.render(couples)
-            })
+                document.querySelector('#loadScreen').classList.add("d-none")
+                document.querySelector('#mainScreen').classList.remove("d-none")
+            },
+                function(i){
+                    document.querySelector('#loadScreen').classList.remove("d-none")
+                    document.querySelector('#mainScreen').classList.add("d-none")
+                    document.querySelector('#loadProgressBar').style.width= i + "%";
+                    console.log(i)
+                }
+            )
         })
     }
 
-    tests = []
+    // tests = []
 
     tests['quiz'] = function () {
         $.get('tests/quiz/main.html').done(function (data) {
@@ -71,6 +85,8 @@ $(document).ready(function () {
                 options.sort(() => Math.random() - 0.5)
 
                 Quiz.render(options, translate, word)
+                document.querySelector('#loadScreen').classList.add("d-none")
+                document.querySelector('#mainScreen').classList.remove("d-none")
             },
                 function(i){
                     document.querySelector('#loadScreen').classList.remove("d-none")
