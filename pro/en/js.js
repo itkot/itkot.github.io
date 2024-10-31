@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    Materials.setProgressCallback(Loader.change)
+
+
     tests = []
 
     tests['puzzle'] = function () {
@@ -19,16 +22,7 @@ $(document).ready(function () {
                 translate = words[word].trs[words[word].trs.length * Math.random() << 0]
 
                 Puzzle.render(word, translate, words[word].cefr, words[word].rating)
-                document.querySelector('#loadScreen').classList.add("d-none")
-                document.querySelector('#mainScreen').classList.remove("d-none")
-            },
-                function(i){
-                    document.querySelector('#loadScreen').classList.remove("d-none")
-                    document.querySelector('#mainScreen').classList.add("d-none")
-                    document.querySelector('#loadProgressBar').style.width= i + "%";
-                    console.log(i)
-                }
-            )
+            })
         })
     }
 
@@ -56,16 +50,7 @@ $(document).ready(function () {
                 }
 
                 Couples.render(couples)
-                document.querySelector('#loadScreen').classList.add("d-none")
-                document.querySelector('#mainScreen').classList.remove("d-none")
-            },
-                function(i){
-                    document.querySelector('#loadScreen').classList.remove("d-none")
-                    document.querySelector('#mainScreen').classList.add("d-none")
-                    document.querySelector('#loadProgressBar').style.width= i + "%";
-                    console.log(i)
-                }
-            )
+            })
         })
     }
 
@@ -85,16 +70,9 @@ $(document).ready(function () {
                 options.sort(() => Math.random() - 0.5)
 
                 Quiz.render(options, translate, word)
-                document.querySelector('#loadScreen').classList.add("d-none")
-                document.querySelector('#mainScreen').classList.remove("d-none")
-            },
-                function(i){
-                    document.querySelector('#loadScreen').classList.remove("d-none")
-                    document.querySelector('#mainScreen').classList.add("d-none")
-                    document.querySelector('#loadProgressBar').style.width= i + "%";
-                    console.log(i)
-                }
-            )
+
+                Loader.finishAction()
+            })
         })
     }
 

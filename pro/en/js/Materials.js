@@ -1,6 +1,12 @@
 Materials = new function() {
-    this.getTOP10K = function (callBack, progressCallBack) {
+    var defaultProgressCallback = function () {}
 
+    this.setProgressCallback = function(progressCallback){
+        if (typeof progressCallback == 'function')
+            defaultProgressCallback = progressCallback
+    }
+
+    this.getTOP10K = function (callBack, progressCallBack) {
         var words = localStorage.getItem('top10kDictionary')
         
         if (words !== null)
@@ -18,6 +24,7 @@ Materials = new function() {
             part = await part.json()
             if (typeof progressCallback == 'function')
                 progressCallback(i)
+            defaultProgressCallback(i)
 
             dictionary = Object.assign(dictionary, part);
         }

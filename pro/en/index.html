@@ -35,14 +35,54 @@
   <div class="container d-none" id="loadScreen">
     <h1 class="text-center m-5">Loading...</h1>
 
-    <div class="progress">
-      <div
-              class="progress-bar bg-success progress-bar-striped"
-              id="loadProgressBar"
-              role="progressbar"
-      >
+
+
+
+
+    <footer class="fixed-bottom">
+      <div class="container text-center">
+
+      <div class="d-flex justify-content-center">
+        <div class="progress w-75">
+          <div
+                  class="progress-bar bg-success progress-bar-striped"
+                  id="loadProgressBar"
+                  role="progressbar"
+          >
+          </div>
+        </div>
       </div>
-    </div>
+
+      <div style="height: 140px">
+        <button class="btn btn-success mt-5 d-none" id="closeLoaderButton">Start!</button>
+      </div>
+
+
+
+
+      </div>
+    </footer>
+
+    <script>
+      Loader = new function () {
+        var closeLoaderButton = document.querySelector('#closeLoaderButton')
+
+        this.change = function(i) {
+          document.querySelector('#loadScreen').classList.remove("d-none")
+          document.querySelector('#mainScreen').classList.add("d-none")
+          document.querySelector('#loadProgressBar').style.width = i + "%";
+          console.log(i >= 100)
+        }
+
+        this.finishAction = function () {
+          closeLoaderButton.classList.remove('d-none')
+          closeLoaderButton.addEventListener("click", function () {//TODO add grow point here to
+                    document.querySelector('#loadScreen').classList.add("d-none")
+                    document.querySelector('#mainScreen').classList.remove("d-none")
+                  });
+        }
+      }
+    </script>
   </div>
 
   <div class="container" id="mainScreen">
@@ -59,8 +99,6 @@
           >
           </div>
         </div>
-
-
     </header>
 
 
