@@ -71,7 +71,10 @@
           document.querySelector('#loadScreen').classList.remove("d-none")
           document.querySelector('#mainScreen').classList.add("d-none")
           document.querySelector('#loadProgressBar').style.width = i + "%";
-          console.log(i >= 100)
+
+          if (i >= 100)
+            Loader.finishAction()
+
         }
 
         this.finishAction = function () {
