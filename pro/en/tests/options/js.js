@@ -136,4 +136,4 @@ const Options = new function() {
         }
 
     }
-};
+}

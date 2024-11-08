@@ -1,4 +1,4 @@
-$(document).ready(function () {
+testInit = function () {
     Materials.setProgressCallback(Loader.change)
 
 
@@ -76,6 +76,25 @@ $(document).ready(function () {
         })
     }
 
+    tests = []
+
+    tests['options'] = function () {
+        Materials.getTOP10K(function (words) {
+            keys = Object.keys(words)
+            keys.sort(() => Math.random() - 0.5)
+
+            options = keys.slice(0, 4)
+            word = options[0]
+            translate = words[word].trs[words[word].trs.length * Math.random() << 0]
+            options.sort(() => Math.random() - 0.5)
+
+
+            Options.render(word, translate, options, '#test')
+            Options.successAction(UserProgress.addPoint)
+            Options.then(testInit)
+        })
+    }
+
 
     function getRandomTest(tests){
         let keys = Object.keys(tests)
@@ -85,4 +104,8 @@ $(document).ready(function () {
     }
 
     getRandomTest(tests)()
-})
+}
+
+
+
+$(document).ready(testInit)
