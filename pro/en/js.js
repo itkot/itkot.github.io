@@ -92,6 +92,9 @@ testInit = function () {
             Options.render(word, translate, options, '#test')
             Options.successAction(UserProgress.addPoint)
             Options.then(testInit)
+
+            Options.addMarkTOP(words[word].rating)
+            Options.addMarkLevel(words[word].cefr)
         })
     }
 

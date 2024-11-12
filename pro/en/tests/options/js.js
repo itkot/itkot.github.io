@@ -137,4 +137,17 @@ const Options = new function() {
         }
 
     }
+
+    this.addMarkTOP = function(top){
+        document.querySelector('#rating b').innerHTML = top + 'k'
+
+        if (top)
+            document.querySelector('#rating').classList.remove("d-none");
+    }
+    this.addMarkLevel = function(level){
+        document.querySelector('#certificate b').innerHTML = level
+
+        if (level)
+            document.querySelector('#certificate').classList.remove("d-none");
+    }
 }
