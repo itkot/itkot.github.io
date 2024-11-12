@@ -72,6 +72,7 @@ const Options = new function() {
                         userAnswer.classList.add('btn-success')
                         successCallBack()
                     }else {
+                        speechSynthesis.speak(optionsSpeakers[word])
                         document.querySelector('#fail-screen').classList.remove('d-none')
                         userAnswer.classList.add('btn-danger')
                         actuallyAnswer.classList.add('btn-success')
