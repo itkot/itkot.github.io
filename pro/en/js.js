@@ -54,28 +54,6 @@ testInit = function () {
         })
     }
 
-    // tests = []
-
-    tests['quiz'] = function () {
-        $.get('tests/quiz/main.html').done(function (data) {
-            $('#test').html(data)
-
-            Materials.getTOP10K(function (words) {
-                keys = Object.keys(words)
-                keys.sort(() => Math.random() - 0.5)
-
-                options = keys.slice(0, 4)
-                word = options[0]
-                translate = words[word].trs[words[word].trs.length * Math.random() << 0]
-                options.sort(() => Math.random() - 0.5)
-
-                Quiz.render(options, translate, word)
-
-                Loader.finishAction()
-            })
-        })
-    }
-
     tests = []
 
     tests['options'] = function () {
