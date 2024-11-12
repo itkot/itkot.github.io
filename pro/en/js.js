@@ -76,6 +76,8 @@ testInit = function () {
         })
     }
 
+    // tests = []
+
 
     function getRandomTest(tests){
         let keys = Object.keys(tests)
@@ -88,5 +90,4 @@ testInit = function () {
 }
 
 
-
-$(document).ready(testInit)
+testInit()
