@@ -4,28 +4,6 @@ testInit = function () {
 
     tests = []
 
-    tests['puzzle'] = function () {
-        $.get('tests/puzzle/main.html').done(function (data) {
-            $('#test').html(data)
-
-            Materials.getTOP10K(function (words) {
-                console.log(words)
-
-                keys = Object.keys(words)
-                word = keys[Math.random()*keys.length << 0]
-
-                console.log(word)
-
-                // if (word.length > 16)
-                //     window.location.reload(true);
-
-                translate = words[word].trs[words[word].trs.length * Math.random() << 0]
-
-                Puzzle.render(word, translate, words[word].cefr, words[word].rating)
-            })
-        })
-    }
-
     tests['couples'] = function () {
         $.get('tests/couples/main.html').done(function (data) {
             $('#test').html(data)
@@ -76,7 +54,20 @@ testInit = function () {
         })
     }
 
-    // tests = []
+
+    tests['puzzle'] = function () {
+        Materials.getTOP10K(function (words) {
+            keys = Object.keys(words)
+            word = keys[Math.random()*keys.length << 0]
+            //         // if (word.length > 16)
+            //         //     window.location.reload(true);
+            translate = words[word].trs[words[word].trs.length * Math.random() << 0]
+
+            Puzzle.render(word, translate, '#test')
+            Puzzle.then(testInit)
+            Puzzle.successAction(UserProgress.addPoint)
+        })
+    }
 
 
     function getRandomTest(tests){

@@ -1,6 +1,11 @@
 const Options = new function() {
     var self = this
     var template = localStorage.getItem('optionsTemplate')
+    if (template == null)
+        template = false
+
+    var renderCalls = []
+
     var successCallBack = function () {}
     var failCallBack = function () {}
     var endCallBack = function () {}
@@ -20,10 +25,6 @@ const Options = new function() {
             endCallBack = handler
     }
 
-    var renderCalls = []
-
-    if (template == null)
-        template = false
 
 
     var fetchTemplate = function () {
@@ -36,7 +37,7 @@ const Options = new function() {
                 localStorage.setItem('optionsTemplate', template);
 
                 while (call = renderCalls.pop()){
-                    self.render(call.word , call.container)
+                    self.render(call.word, call.translate, call.options, call.container)
                 }
             })
     }
@@ -54,8 +55,9 @@ const Options = new function() {
             return
         }
 
+
         if (template == false)
-            renderCalls.push({word: word, container: containerQuery})
+            renderCalls.push({word: word,translate: translate, options: options, container: containerQuery})
         else {
             document.querySelector(containerQuery).innerHTML = template
             document
@@ -139,15 +141,25 @@ const Options = new function() {
     }
 
     this.addMarkTOP = function(top){
-        document.querySelector('#rating b').innerHTML = top + 'k'
+        if (top == undefined)
+            return
 
-        if (top)
-            document.querySelector('#rating').classList.remove("d-none");
+        element = document.querySelector('#rating b')
+        if (element)
+            element.innerHTML = top + 'k'
+        else return
+
+            document.querySelector('#rating').classList.remove("d-none")
     }
     this.addMarkLevel = function(level){
-        document.querySelector('#certificate b').innerHTML = level
+        if (level == undefined)
+            return
 
-        if (level)
-            document.querySelector('#certificate').classList.remove("d-none");
+        element = document.querySelector('#certificate b')
+
+        if (element)
+            element.innerHTML = level
+        else return
+            document.querySelector('#certificate').classList.remove("d-none")
     }
 }
