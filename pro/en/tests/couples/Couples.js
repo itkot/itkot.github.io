@@ -21,6 +21,10 @@ Couples = new function () {
     this.then = function (handler) {
         if (typeof handler === 'function')
             endCallBack = handler
+
+        if ($('#finish'))
+            $('#finish')
+                .addEventListener('click', endCallBack)
     }
 
     var renderCalls = []
@@ -57,7 +61,7 @@ Couples = new function () {
     const cancelFail = function () {
         $('#fail-screen').classList.add('d-none')
 
-        $('#couples .option.btn-danger').forEach(function (item) {
+        $('#couples .option.btn-danger').forEach((item) => {
             item.classList.remove('btn-danger')
             item.classList.add('btn-outline-dark')
         })
@@ -74,7 +78,6 @@ Couples = new function () {
             renderCalls.push({wordsTranslates: wordsTranslates, container: containerQuery})
             return
         } else {
-            console.log(wordsTranslates)
             $(containerQuery).innerHTML = template
 
             coupleTemplate = $('#couple-template').innerHTML;
@@ -83,7 +86,7 @@ Couples = new function () {
             translates = Object.values(wordsTranslates)
             translates = translates.sort(() => Math.random() - 0.5)
 
-            words.forEach(function (item, n) {
+            words.forEach((item, n) => {
                 $('#words').innerHTML += coupleTemplate.replace('{content}', item).replace('{type}', 'word')
                 $('#translates').innerHTML += coupleTemplate.replace('{content}', translates[n]).replace('{type}', 'translate')
 
@@ -121,7 +124,7 @@ Couples = new function () {
             // $('#couples .option.btn-success').animate({opacity: 0}, 1000);
 
             if ($('#couples .option.btn-danger'))
-                $('#couples .option.btn-danger').forEach(function (item) {
+                $('#couples .option.btn-danger').forEach((item) => {
                     item.classList.remove('btn-danger')
                     item.classList.add('btn-outline-dark')
                 })
@@ -135,10 +138,8 @@ Couples = new function () {
             translate = $('#couples .option[type="translate"].btn-dark').innerHTML
 
             if (word && translate) {
-                console.log(wordsTranslates[word] == translate)
-
                 if (wordsTranslates[word] == translate){
-                    $('#couples .option.btn-dark').forEach(function (item) {
+                    $('#couples .option.btn-dark').forEach((item) => {
                         item.classList.remove('btn-dark')
                         item.classList.add('btn-success')
                     })
@@ -147,15 +148,18 @@ Couples = new function () {
 
 
                     console.log()
-                    if (!$('#couples .btn-outline-dark'))
-                        endCallBack()
+                    if (!$('#couples .btn-outline-dark')) {
+                        $('#success-screen').classList.remove('d-none')
+                        $('#conditions-screen').classList.add('d-none')
+                        $('#give-up-button').classList.add('d-none')
+                    }
 
                     successCallBack()
                 }else{
                     $('#fail-screen').classList.remove('d-none')
                     $('#answer').innerHTML = word + ' - ' + wordsTranslates[word]
 
-                    $('#couples .option.btn-dark').forEach(function (item) {
+                    $('#couples .option.btn-dark').forEach((item) => {
                         item.classList.remove('btn-dark')
                         item.classList.add('btn-danger')
                     })
@@ -163,7 +167,7 @@ Couples = new function () {
             }
         }
 
-        $('#couples .option').forEach(function (item) {
+        $('#couples .option').forEach((item) => {
             item.addEventListener('click', select)
         })
 
