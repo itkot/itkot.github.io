@@ -4,35 +4,6 @@ testInit = function () {
 
     tests = []
 
-    tests['couples'] = function () {
-        $.get('tests/couples/main.html').done(function (data) {
-            $('#test').html(data)
-
-            Materials.getTOP10K(function (words) {
-                couples = {}
-
-                for (let i = 0; i < 100; i++) {//NASA like loop
-                    keys = Object.keys(words)
-                    word = keys[Math.random()*keys.length << 0]
-
-                    translate = words[word].trs[words[word].trs.length * Math.random() << 0]
-
-                    if (word.length > 10||
-                        translate.length > 10)
-                        continue;
-
-                    couples[word] = translate
-
-                    if (Object.keys(couples).length >= 6)
-                        break;
-                }
-
-                Couples.render(couples)
-            })
-        })
-    }
-
-    tests = []
 
     tests['options'] = function () {
         Materials.getTOP10K(function (words) {
@@ -69,6 +40,34 @@ testInit = function () {
         })
     }
 
+    // tests = []
+
+
+    tests['couples'] = function () {
+        Materials.getTOP10K(function (words) {
+            couples = {}
+
+            for (let i = 0; i < 100; i++) {//NASA like loop
+                keys = Object.keys(words)
+                word = keys[Math.random()*keys.length << 0]
+
+                translate = words[word].trs[words[word].trs.length * Math.random() << 0]
+
+                if (word.length > 10||
+                    translate.length > 10)
+                    continue;
+
+                couples[word] = translate
+
+                if (Object.keys(couples).length >= 6)
+                    break;
+            }
+
+            Couples.render(couples, '#test')
+            Couples.then(testInit)
+            Couples.successAction(UserProgress.addPoint)
+        })
+    }
 
     function getRandomTest(tests){
         let keys = Object.keys(tests)
