@@ -9,7 +9,7 @@ UserProgress = new function () {
 
     var series = localStorage.getItem('series')
     if (series === null)
-        series = 0;
+        series = 1;
 
 
     this.addPoint = function () {
