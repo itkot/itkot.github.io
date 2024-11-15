@@ -18,6 +18,7 @@ testInit = function () {
 
             Options.render(word, translate, options, '#test')
             Options.successAction(UserProgress.addPoint)
+            Options.failCallBack(UserProgress.fail)
             Options.then(testInit)
 
             Options.addMarkTOP(words[word].rating)
@@ -37,10 +38,9 @@ testInit = function () {
             Puzzle.render(word, translate, '#test')
             Puzzle.then(testInit)
             Puzzle.successAction(UserProgress.addPoint)
+            Puzzle.successAction(UserProgress.addPoint)
         })
     }
-
-    // tests = []
 
 
     tests['couples'] = function () {
@@ -66,6 +66,7 @@ testInit = function () {
             Couples.render(couples, '#test')
             Couples.then(testInit)
             Couples.successAction(UserProgress.addPoint)
+            Couples.failAction(UserProgress.fail)
         })
     }
 

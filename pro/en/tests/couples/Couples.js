@@ -57,6 +57,12 @@ Couples = new function () {
             successCallBack = handler
     }
 
+    var failCallBack = () => {}
+    this.failAction = (handler) => {
+        if (typeof handler === 'function')
+            failCallBack = handler
+    }
+
 
     const cancelFail = function () {
         $('#fail-screen').classList.add('d-none')
@@ -163,6 +169,8 @@ Couples = new function () {
                         item.classList.remove('btn-dark')
                         item.classList.add('btn-danger')
                     })
+
+                    failCallBack()
                 }
             }
         }

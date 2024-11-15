@@ -7,19 +7,18 @@ const Options = new function() {
     var renderCalls = []
 
     var successCallBack = function () {}
-    var failCallBack = function () {}
-    var endCallBack = function () {}
-    
     this.successAction = function (handler) {
         if (typeof handler === 'function')
             successCallBack = handler
     }
 
+    var failCallBack = function () {}
     this.failCallBack = function (handler) {
         if (typeof handler === 'function')
             failCallBack = handler
     }
 
+    var endCallBack = function () {}
     this.then = function (handler) {
         if (typeof handler === 'function')
             endCallBack = handler

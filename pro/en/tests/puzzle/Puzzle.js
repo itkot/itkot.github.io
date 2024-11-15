@@ -22,6 +22,11 @@ Puzzle = new function () {
             successCallBack = handler
     }
 
+    this.failCallBack = function (handler) {
+        if (typeof handler === 'function')
+            failCallBack = handler
+    }
+
 
     var fetchTemplate = function () {
         fetch('tests/puzzle/template.html')
