@@ -131,8 +131,10 @@ Puzzle = new function () {
             if (answer == word) {
                 $('#success-screen')[0].classList.remove('d-none')
                 successCallBack()
-            } else
+            } else{
+                $('#correct-answer')[0].innerHTML = word + ' - ' + translate
                 $('#fail-screen')[0].classList.remove('d-none')
+            }
 
         })
     }
