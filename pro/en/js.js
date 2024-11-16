@@ -27,35 +27,6 @@ testInit = function () {
     }
 
 
-
-
-    tests['couples'] = function () {
-        Materials.getTOP10K(function (words) {
-            couples = {}
-
-            for (let i = 0; i < 100; i++) {//NASA like loop
-                keys = Object.keys(words)
-                word = keys[Math.random()*keys.length << 0]
-
-                translate = words[word].trs[words[word].trs.length * Math.random() << 0]
-
-                if (word.length > 10||
-                    translate.length > 10)
-                    continue;
-
-                couples[word] = translate
-
-                if (Object.keys(couples).length >= 6)
-                    break;
-            }
-
-            Couples.render(couples, '#test')
-            Couples.then(testInit)
-            Couples.successAction(UserProgress.addPoint)
-            Couples.failAction(UserProgress.fail)
-        })
-    }
-
     tests['puzzle'] = function () {
         Materials.getTOP10K(function (words) {
             console.log(words)
@@ -69,6 +40,34 @@ testInit = function () {
             Puzzle.then(testInit)
             Puzzle.successAction(UserProgress.addPoint)
             Puzzle.successAction(UserProgress.addPoint)
+        })
+    }
+
+    tests = []
+
+
+    tests['couples'] = function () {
+        Materials.getTOP10K(function (words) {
+            var couples = {}
+            var keys = Object.keys(words)
+                .filter(word =>word.length < 9)
+                .sort(() => Math.random() - 0.5)
+
+            keys.map(
+                (word) => {
+                    if (Object.keys(couples).length == 6)
+                        return
+
+                    trs = words[word].trs.filter(trs => trs.length < 9)
+                    if (trs.length)
+                        couples[word] = trs[trs.length * Math.random() << 0]
+                }
+            )
+
+            Couples.render(couples, '#test')
+            Couples.then(testInit)
+            Couples.successAction(UserProgress.addPoint)
+            Couples.failAction(UserProgress.fail)
         })
     }
 
