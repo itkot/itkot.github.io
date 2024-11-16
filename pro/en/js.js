@@ -56,8 +56,6 @@ testInit = function () {
 
     tests['puzzle'] = function () {
         Materials.getTOP10K(function (words) {
-            console.log(words)
-
             keys = Object.keys(words).filter(word => word.length < 16)
             word = keys[Math.random()*keys.length << 0]
             translate = words[word].trs[words[word].trs.length * Math.random() << 0]
