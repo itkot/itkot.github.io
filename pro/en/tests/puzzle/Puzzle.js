@@ -22,7 +22,8 @@ Puzzle = new function () {
             successCallBack = handler
     }
 
-    this.failCallBack = function (handler) {
+    var failCallBack = function () {}
+    this.failAction = function (handler) {
         if (typeof handler === 'function')
             failCallBack = handler
     }
@@ -134,6 +135,7 @@ Puzzle = new function () {
             } else{
                 $('#correct-answer')[0].innerHTML = word + ' - ' + translate
                 $('#fail-screen')[0].classList.remove('d-none')
+                failCallBack()
             }
 
         })
