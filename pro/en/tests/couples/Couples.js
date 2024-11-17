@@ -92,6 +92,9 @@ Couples = new function () {
             translates = Object.values(wordsTranslates)
             translates = translates.sort(() => Math.random() - 0.5)
 
+            if (JSON.stringify(translates) == JSON.stringify(Object.values(wordsTranslates)))
+                translates = translates.sort(() => Math.random() - 0.5)
+
             words.forEach((item, n) => {
                 $('#words').innerHTML += coupleTemplate.replace('{content}', item).replace('{type}', 'word')
                 $('#translates').innerHTML += coupleTemplate.replace('{content}', translates[n]).replace('{type}', 'translate')
