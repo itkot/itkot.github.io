@@ -64,7 +64,7 @@ testInit = function () {
             Puzzle.render(word, translate, '#test')
             Puzzle.then(testInit)
             Puzzle.successAction(UserProgress.addPoint)
-            Puzzle.successAction(UserProgress.addPoint)
+            Puzzle.failAction(UserProgress.fail)
         })
     }
 
