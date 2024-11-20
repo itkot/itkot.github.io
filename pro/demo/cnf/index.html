@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Charts and functions</title>
+
+
+</head>
+
+<style>
+    .charts-container{
+    width: 100%;
+    height: 80vh;
+    }
+</style>
+
+<body>
+    <label>center</label>
+    <input type="number" value="50" style="width: 40px" id="center" disabled>
+    <button id="plus">+</button>
+    <button id="minus">-</button>
+    <br><br>
+    <label>screw</label>
+    <input type="number" value="-0.3" style="width: 40px" id="screw" disabled>
+    <button id="plusSCR">+</button>
+    <button id="minusSCR">-</button>
+
+    <div class="charts-container">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var chart = false
+
+
+        generate = function (center = 0, scr = 0) {
+            const baseCount = 100
+            const rounds = 10000
+            var dataSet = new Array(baseCount).fill(0)
+            var gausLikeSet = []
+            var justSet = []
+
+            ex = 1 + scr
+            console.log(center, ex)
+            for (let i=0; i < rounds; i++) {
+                let gausLike = (Math.random() + Math.random()) / 2 * baseCount
+                let just = Math.floor(Math.random() * baseCount)
+
+
+                if (gausLikeSet[Math.floor(gausLike)])
+                    gausLikeSet[Math.floor(gausLike)]++
+                else
+                    gausLikeSet[Math.floor(gausLike)] = 1
+
+
+                if (justSet[Math.floor(just)])
+                    justSet[Math.floor(just)]++
+                else
+                    justSet[Math.floor(just)] = 1
+
+
+//                ex = 0.6
+
+
+
+
+                if (Math.random()*baseCount < center)
+                    number = Math.floor(Math.pow(Math.random(), ex) * center)
+                else
+                    number = Math.floor(baseCount - Math.pow(Math.random(), ex) * (baseCount - center))
+
+
+                dataSet[number]++
+//            number = Math.floor(baseCount - Math.pow(Math.random(), 0.75)*(baseCount))
+            }
+
+
+            const ctx = document.getElementById('myChart');
+
+            if (chart !== false)
+                chart.destroy()
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(dataSet),
+                    datasets: [
+                        {
+                            label: 'Justify',
+                            data: justSet,
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'gausLike',
+                            data: gausLikeSet,
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Mixed',
+                            data: dataSet,
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+//                scales: {
+//                    y: {
+//                        beginAtZero: true
+//                    }
+//                }
+                }
+            });
+
+        }
+
+
+        center = document.querySelector('#center')
+        screw = document.querySelector('#screw')
+        console.log(center)
+
+        document.querySelector('#plus').addEventListener(
+                'click',
+                () => { generate(center.value = parseInt(center.value) + 10, parseFloat(screw.value))}
+        )
+        document.querySelector('#minus').addEventListener(
+                'click',
+                () => { generate(center.value = parseInt(center.value) - 10, parseFloat(screw.value))}
+        )
+
+        document.querySelector('#plusSCR').addEventListener(
+                'click',
+                () => { generate(center.value, screw.value = parseFloat(screw.value) + 0.1)}
+        )
+        document.querySelector('#minusSCR').addEventListener(
+                'click',
+                () => { generate(center.value, screw.value = parseFloat(screw.value) - 0.1)}
+        )
+
+
+        generate(parseInt(center.value), parseFloat(screw.value))
+    </script>
+
+</body>
+</html>
