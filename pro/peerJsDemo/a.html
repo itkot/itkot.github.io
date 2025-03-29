@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A</title>
+    <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+    <style>
+        video{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<a id="id" target="_blank" style="display: none">invite link</a>
+
+<br>
+
+<video id="video" autoplay></video>
+
+</body>
+<script>
+
+    peer = new Peer(null, {
+        debug: 2
+    });
+
+
+    const incomeId = (new URLSearchParams(window.location.search)).get('id')
+    console.log(incomeId)
+
+    peer.on('open', function (id) {
+        if (peer.id === null) {
+            console.log('Received null id from peer open');
+            peer.id = lastPeerId;
+        } else {
+            lastPeerId = peer.id;
+        }
+
+        document.getElementById('id').href = '/itkot/pro/peerJsDemo/b.html?id=' + peer.id;
+        document.getElementById('id').style.display = 'inline'
+    });
+
+
+
+    peer.on('call', function(call) {
+        console.log(call);
+        // getUserMedia({video: true, audio: true}, function(stream) {
+
+
+         var getUserMedia;
+         var browserUserMedia =	navigator.webkitGetUserMedia	||	// WebKit
+             navigator.mozGetUserMedia	||	// Mozilla FireFox
+             navigator.getUserMedia;			// 2013...
+         if ( !browserUserMedia ) throw 'Your browser doesn\'t support WebRTC';
+
+         getUserMedia = browserUserMedia.bind( navigator );
+
+         getUserMedia(
+             {
+                 audio: false,
+                 video: true
+             },
+             function( stream ) {
+                 console.log( stream );
+                 call.answer(stream); // Answer the call with an A/V stream.
+
+             },
+             function( err ) {
+                 console.log( err );
+             }
+         );
+
+//            call.answer(window.localStream); // Answer the call with an A/V stream.
+
+
+            call.on('stream', function(remoteStream) {
+                 console.log(remoteStream);
+                 console.log('remoteStream');
+
+                 var videoElement = document.getElementById( 'video' );
+                 try {
+                     videoElement.srcObject = remoteStream;
+                 } catch (error) {
+                     videoElement.src = window.URL.createObjectURL(remoteStream);
+                 }
+                 // Show stream in some video/canvas element.
+             });
+
+    });
+
+    peer.on('disconnected', function () {
+        console.log('Connection lost. Please reconnect');
+
+        // Workaround for peer.reconnect deleting previous id
+    });
+
+
+
+
+</script>
+
+</html>
