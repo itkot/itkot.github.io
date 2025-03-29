@@ -36,7 +36,7 @@
             lastPeerId = peer.id;
         }
 
-        document.getElementById('id').href = '/itkot/pro/peerJsDemo/b.html?id=' + peer.id;
+        document.getElementById('id').href = 'b.html?id=' + peer.id;
         document.getElementById('id').style.display = 'inline'
     });
 
@@ -58,7 +58,10 @@
          getUserMedia(
              {
                  audio: false,
-                 video: true
+                 video:  {
+                     width: { ideal: 80 },
+                     height: { ideal: 60 }
+                 }
              },
              function( stream ) {
                  console.log( stream );
