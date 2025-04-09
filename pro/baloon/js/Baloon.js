@@ -15,7 +15,7 @@ Baloon = function(){
         if (this.f < 0)
             return;
         this.t += .01;
-        this.f -= .001;
+        this.f -= .01;
     };
 
     setInterval(function(t){
