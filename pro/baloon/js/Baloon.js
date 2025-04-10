@@ -7,7 +7,7 @@ Baloon = function(){
     this.body.draw();
 
     this.height = 1;
-    this.t = .7;
+    this.t = .5;
     this.f = 1;
 
     //console.log(Math.pow(100, 1/3));
@@ -30,8 +30,8 @@ Baloon = function(){
 
         dy = (ch - fh)/2;
         dy = (dy < 0 ? -1 : 1) * Math.pow(Math.abs(dy), 1/3);
-        if (Math.abs(dy) > 0.5)
-            t.body.move(wind.wind,-dy);
+
+        t.body.move(wind.get(t.body._y)*2, -dy);
 
         t.t -= (t.height + 1)*0.0005;
     },100, this);

@@ -28,9 +28,10 @@ function Body(){
         }).appendTo('body');
     };
 
-    this.move = function(dx,dy){
+    this.move = function(dx,dy){//TODO filter input (only float and int should be aloud)
         this._x += dx;
         this._y += dy;
+
         $(this.body).offset({top: this._y, left: this._x});
     }
 

@@ -1,4 +1,6 @@
 body {
     touch-action: manipulation;
     background-color: lightblue;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }

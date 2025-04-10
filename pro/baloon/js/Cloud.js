@@ -11,6 +11,6 @@ Cloud = function(){
 
 
     setInterval(function(t){
-        t.body.move(wind.wind, 0);
+        t.body.move(wind.get(t.body._y), 0);
     },100, this);
 };
