@@ -18,7 +18,7 @@ Baloon = function(){
         this.f -= .01;
     };
 
-    setInterval(function(t){
+    setInterval(function(t){//TODO count fps rate
         $("#tBar").val(t.t);
         $("#fBar").val(t.f);
 
