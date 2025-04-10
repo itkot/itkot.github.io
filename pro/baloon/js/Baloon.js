@@ -3,11 +3,11 @@ Baloon = function(){
     this.body.img = 'img/baloon.png';
     this.body.w = 70;
     this.body.h = 70;
-    this.body._x = 400;
+    this.body._x = 100;
     this.body.draw();
 
     this.height = 1;
-    this.t = .5;
+    this.t = .7;
     this.f = 1;
 
     //console.log(Math.pow(100, 1/3));

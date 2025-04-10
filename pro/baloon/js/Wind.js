@@ -6,4 +6,6 @@ Wind = function(){
         //console.log(t.wind);
     },1000, this);
 
+
+
 };

@@ -31,7 +31,6 @@ function Body(){
     this.move = function(dx,dy){
         this._x += dx;
         this._y += dy;
-        console.log(this._x);
         $(this.body).offset({top: this._y, left: this._x});
     }
 
