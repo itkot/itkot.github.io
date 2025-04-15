@@ -1,15 +1,19 @@
 body {
     touch-action: manipulation;
     background-color: lightblue;
-    overflow-x: hidden;
+    overflow-x: scroll;
     overflow-y: hidden;
 }
 
 .tapNotification{
     font-family: "Lucida Console", Courier, monospace;
     position: fixed;
-    left: 50%;
+    left: 10%;
     bottom: 20px;
-    transform: translate(-50%, -50%);
+    /*transform: translate(-50%, -50%);*/
     margin: 0 auto;
+}
+
+.top-bars{
+    position: fixed;
 }

@@ -14,9 +14,15 @@ Baloon = function(){
     this.fire = function(){
         if (this.f < 0)
             return;
-        this.t += .01;
-        this.f -= .01;
+        this.t += .05;
+        this.f -= .05;
     };
+
+    var ticksPerSec = 0
+    setInterval(function(){
+        console.log(ticksPerSec)
+        ticksPerSec = 0
+    }, 1000)
 
     setInterval(function(t){//TODO count fps rate
         $("#tBar").val(t.t);
@@ -31,9 +37,11 @@ Baloon = function(){
         dy = (ch - fh)/2;
         dy = (dy < 0 ? -1 : 1) * Math.pow(Math.abs(dy), 1/3);
 
-        t.body.move(wind.get(t.body._y)*2, -dy);
+        t.body.move(wind.get(t.body._y), -dy);
 
-        t.t -= (t.height + 1)*0.0005;
+        t.t -= (t.height + 1)*0.001;
+
+        ticksPerSec++
     },100, this);
 
 };

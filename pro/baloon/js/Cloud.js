@@ -1,5 +1,7 @@
 Cloud = function(){
+    self = this
     this.body = new Body();
+    var body = this.body
     this.body.img = 'img/cloud.png';
     this.body.w = 70;
     this.body.h =  70;
@@ -10,7 +12,15 @@ Cloud = function(){
     this.height = 1;
 
 
-    setInterval(function(t){
+    var interval = setInterval(function(t){
         t.body.move(wind.get(t.body._y), 0);
     },100, this);
+
+    console.log(interval)
+
+    this.remove = function(){
+        clearInterval(interval)
+        body.body.remove()
+        delete body
+    }
 };
