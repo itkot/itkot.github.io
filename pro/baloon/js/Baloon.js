@@ -37,7 +37,11 @@ Baloon = function(){
         dy = (ch - fh)/2;
         dy = (dy < 0 ? -1 : 1) * Math.pow(Math.abs(dy), 1/3);
 
-        t.body.move(wind.get(t.body._y), -dy);
+        const dx = wind.get(t.body._y)
+
+        t.body.move(dx, -dy);
+        // t.body.style.transform = "rotate(30deg);"
+        t.body.rotate(dx*5)
 
         t.t -= (t.height + 1)*0.001;
 

@@ -16,7 +16,7 @@ function Body(){
                 backgroundSize: "100% 100%",
                 backgroundRepeat: 'no-repeat',
                 display: 'block',
-                position: 'absolute'
+                position: 'absolute',
             },
             width: this.w,
             height: this.h,
@@ -35,4 +35,7 @@ function Body(){
         $(this.body).offset({top: this._y, left: this._x});
     }
 
+    this.rotate = function (angle) {
+        $(this.body).css({'transform': "rotate("+angle+"deg)"})
+    }
 }

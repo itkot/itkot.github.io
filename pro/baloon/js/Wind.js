@@ -14,7 +14,7 @@ Wind = function(){
         if (debug)
             console.log(y/screenH * 6)
 
-        return Math.sin(y/screenH * 6)
+        return Math.sin(y/screenH * 6)*2
     }
 
 
