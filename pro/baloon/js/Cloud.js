@@ -1,12 +1,13 @@
-Cloud = function(){
-    self = this
+Cloud = function(user){
     this.body = new Body();
-    var body = this.body
     this.body.img = 'img/cloud.png';
     this.body.w = 70;
     this.body.h =  70;
     this.body._x = Math.random()*$('html').width()
-    this.body._y = 100 + (Math.random()*$('html').height() - 100)
+    this.body._y = 50 + Math.random()*($('html').height() - 200)
+
+    console.log(this.body._y)
+
     this.body.draw();
 
     this.height = 1;
@@ -14,13 +15,19 @@ Cloud = function(){
 
     var interval = setInterval(function(t){
         t.body.move(wind.get(t.body._y), 0);
+        // console.log(Math.round(user.body._x))
+
+
+        var maxDX = $('html').width()
+        if (Math.abs(Math.round(user.body._x - t.body._x)) > maxDX)
+            t.body._x = user.body._x + (Math.round(Math.random()) * 2 - 1)*maxDX
+
+
     },100, this);
 
     console.log(interval)
 
     this.remove = function(){
         clearInterval(interval)
-        body.body.remove()
-        delete body
     }
 };

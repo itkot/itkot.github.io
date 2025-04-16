@@ -1,8 +1,8 @@
 body {
     touch-action: manipulation;
     background-color: lightblue;
-    overflow-x: scroll;
     overflow-y: hidden;
+    overflow-x: scroll;
 }
 
 .tapNotification{

@@ -29,15 +29,11 @@
     //TODO fps WTF
     wind = new Wind()
     user = new Baloon()
-    cloud = new Cloud()
-    cloud = new Cloud()
-    cloud = new Cloud()
-    cloud = new Cloud()
-    cloud = new Cloud()
-    cloud = new Cloud()
-    cloud = new Cloud()
-    cloud = new Cloud()
-    cloud = new Cloud()
+
+    for (let i = 0; i < 12; i++) {
+        new Cloud(user)
+    }
+
 
     document.onkeydown = function(e){
         if (e.keyCode == 32)
