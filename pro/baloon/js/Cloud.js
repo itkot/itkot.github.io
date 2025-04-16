@@ -3,7 +3,7 @@ Cloud = function(user){
     this.body.img = 'img/cloud.png';
     this.body.w = 70;
     this.body.h =  70;
-    this.body._x = Math.random()*$('html').width()
+    this.body._x = (Math.random()*2 - 1)*$('html').width()
     this.body._y = 50 + Math.random()*($('html').height() - 200)
 
     console.log(this.body._y)
