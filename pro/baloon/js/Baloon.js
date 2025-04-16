@@ -12,8 +12,11 @@ Baloon = function(){
 
     //console.log(Math.pow(100, 1/3));
     this.fire = function(){
-        if (this.f < 0)
+        if (this.f < 0) {
+            Interface.fuelIsOverAction()
             return;
+        }
+
         this.t += .05;
         this.f -= .05;
     };
