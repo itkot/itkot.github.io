@@ -9,6 +9,7 @@ Baloon = function(){
     this.height = 1;
     this.t = .5;
     this.f = 1;
+    this.dx = 0
 
     //console.log(Math.pow(100, 1/3));
     this.fire = function(){
@@ -42,9 +43,11 @@ Baloon = function(){
 
         const dx = wind.get(t.body._y)
 
-        t.body.move(dx, -dy);
+        t.body.move(dx, -dy)
+
         // t.body.style.transform = "rotate(30deg);"
-        t.body.rotate(dx*5)
+        t.body.rotate((dx - t.dx)*100)
+        t.dx = dx
 
         t.t -= (t.height + 1)*0.001;
 
