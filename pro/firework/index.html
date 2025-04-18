@@ -54,11 +54,31 @@
             const nY = nSpeed*(y/distance)
             const nX = nSpeed*(x/distance)
 
-
             this.shoot = new Spark(startX, startY, nX, nY, ctx)
-//            var vaitForBang = setInterval(function(t){
-//                console.log(destinationX - t.shoot.x)
-//            },100, this)
+
+
+            var distans = Math.abs(startX+destinationX - this.shoot.x)
+            var waitForBang = setInterval(function(t){
+//                console.log(Math.abs(t.shoot.x - startX+destinationX))
+                console.log(Math.abs(startX+destinationX - t.shoot.x))
+
+                if (Math.abs(startX+destinationX - t.shoot.x) > distans){
+                    clearInterval(waitForBang)
+                    console.log('Bam!!!')
+
+                    for (let i = 0; i < 40; i++)
+                        new Spark(
+                            t.shoot.x,
+                            t.shoot.y,
+                            t.shoot.speedX + (Math.random() - 0.5)*50,
+                            t.shoot.speedY + (Math.random() - 0.5)*50,
+                            ctx)
+                }
+
+                distans = Math.abs(startX+destinationX - t.shoot.x)
+//                console.log(distans)
+
+            },40, this)
         }
 
 
