@@ -1,0 +1,95 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Firework!</title>
+
+    <style>
+        #canvas {
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="canvas"></canvas>
+</body>
+    <script>
+        Spark = function (startX, startY, speedX, speedY, ctx){
+            this.x = startX
+            this.y = startY
+            this.speedX = speedX
+            this.speedY = speedY
+
+            console.log(this.speedX + ' - ' + this.speedY)
+
+            setInterval(function(t){
+                ctx.beginPath()
+                ctx.moveTo(t.x, t.y)
+                t.x = t.x + t.speedX
+                t.y = t.y + t.speedY
+                ctx.lineTo(t.x, t.y)
+                ctx.stroke()
+                t.speedY = t.speedY + 2
+            },40, this)
+        }
+
+        Shoot = function (startX, startY, destinationX, destinationY, ctx) {
+
+            const x = destinationX
+            const y = destinationY
+
+            const distance = Math.sqrt(x*x + y*y)
+            console.log('general speed:' + distance)
+            console.log('x speed:' + x + ' y speed:' + y)
+            console.log('x ratio: ' + x/distance)
+            console.log('y ratio: ' + y/distance)
+
+            const nSpeed = canvas.height*0.075
+            const nY = nSpeed*(y/distance)
+            const nX = nSpeed*(x/distance)
+
+
+            this.shoot = new Spark(startX, startY, nX, nY, ctx)
+//            var vaitForBang = setInterval(function(t){
+//                console.log(destinationX - t.shoot.x)
+//            },100, this)
+        }
+
+
+
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.addEventListener('click', function (e) {
+            console.log('click: ' + e.layerX + ' - ' + e.layerY)
+
+            corner = Math.round(Math.random())
+
+            new Shoot(corner*canvas.width , canvas.height, e.layerX - corner*canvas.width, -(canvas.height-e.layerY), ctx)
+        })
+
+        function resize() {
+            const canvas = document.getElementById("canvas")
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            render();
+            console.log(window.innerWidth + ' - ' + window.innerHeight)
+        }
+        window.addEventListener('resize', resize, false);
+        resize();
+        function render() { // draw to screen here
+
+            ctx.fillStyle = "#003153";
+            ctx.strokeStyle = 'red'
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+
+    </script>
+</html>
