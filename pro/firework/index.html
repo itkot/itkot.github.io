@@ -12,7 +12,14 @@
             width:100%;
             height:100%;
         }
+        body{
+            /*background-color: #003153;*/
+        }
     </style>
+
+    <script src="js/Scene.js"></script>
+    <script src="js/Spark.js"></script>
+    <script src="js/Shoot.js"></script>
 </head>
 
 <body>
@@ -20,96 +27,24 @@
     <canvas id="canvas"></canvas>
 </body>
     <script>
-        Spark = function (startX, startY, speedX, speedY, ctx){
-            this.x = startX
-            this.y = startY
-            this.speedX = speedX
-            this.speedY = speedY
+        scene = new Scene('#canvas')
 
-            console.log(this.speedX + ' - ' + this.speedY)
-
-            setInterval(function(t){
-                ctx.beginPath()
-                ctx.moveTo(t.x, t.y)
-                t.x = t.x + t.speedX
-                t.y = t.y + t.speedY
-                ctx.lineTo(t.x, t.y)
-                ctx.stroke()
-                t.speedY = t.speedY + 2
-            },40, this)
-        }
-
-        Shoot = function (startX, startY, destinationX, destinationY, ctx) {
-
-            const x = destinationX
-            const y = destinationY
-
-            const distance = Math.sqrt(x*x + y*y)
-            console.log('general speed:' + distance)
-            console.log('x speed:' + x + ' y speed:' + y)
-            console.log('x ratio: ' + x/distance)
-            console.log('y ratio: ' + y/distance)
-
-            const nSpeed = canvas.height*0.075
-            const nY = nSpeed*(y/distance)
-            const nX = nSpeed*(x/distance)
-
-            this.shoot = new Spark(startX, startY, nX, nY, ctx)
-
-
-            var distans = Math.abs(startX+destinationX - this.shoot.x)
-            var waitForBang = setInterval(function(t){
-//                console.log(Math.abs(t.shoot.x - startX+destinationX))
-                console.log(Math.abs(startX+destinationX - t.shoot.x))
-
-                if (Math.abs(startX+destinationX - t.shoot.x) > distans){
-                    clearInterval(waitForBang)
-                    console.log('Bam!!!')
-
-                    for (let i = 0; i < 40; i++)
-                        new Spark(
-                            t.shoot.x,
-                            t.shoot.y,
-                            t.shoot.speedX + (Math.random() - 0.5)*50,
-                            t.shoot.speedY + (Math.random() - 0.5)*50,
-                            ctx)
-                }
-
-                distans = Math.abs(startX+destinationX - t.shoot.x)
-//                console.log(distans)
-
-            },40, this)
-        }
-
-
-
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-
-        canvas.addEventListener('click', function (e) {
+        scene.click(function (e) {
             console.log('click: ' + e.layerX + ' - ' + e.layerY)
+            spark = new Spark(e.layerX, e.layerY, 0, 0)
+            scene.addObject(spark)
 
             corner = Math.round(Math.random())
+            shoot = new Shoot(
+                corner*canvas.width,
+                canvas.height,
+                e.layerX - corner*canvas.width,
+                -(canvas.height-e.layerY),
+                this)
 
-            new Shoot(corner*canvas.width , canvas.height, e.layerX - corner*canvas.width, -(canvas.height-e.layerY), ctx)
+            scene.addObject(shoot)
+
+
         })
-
-        function resize() {
-            const canvas = document.getElementById("canvas")
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            render();
-            console.log(window.innerWidth + ' - ' + window.innerHeight)
-        }
-        window.addEventListener('resize', resize, false);
-        resize();
-        function render() { // draw to screen here
-
-            ctx.fillStyle = "#003153";
-            ctx.strokeStyle = 'red'
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-
     </script>
 </html>
