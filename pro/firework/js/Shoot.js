@@ -22,20 +22,21 @@ Shoot = function (startX, startY, destinationX, destinationY) {
 
     var distans = Math.abs(startX+destinationX - this.shoot.x)
 
-    this.render = function (ctx) {
+    this.render = function () {
         if (Math.abs(startX+destinationX - this.shoot.x) > distans){
-            console.log('Bam!!!')
 
-            console.log(this.shoot.x, this.shoot.y, this.shoot.speedX, this.shoot.speedY)
+            for (let i = 0; i < 100; i++) {
+                const diffusionAngle = Math.random()*6.28
+                const diffusionSpeed = Math.random()*12
 
-            for (let i = 0; i < 100; i++)
                 scene.addObject(
                     new Spark(
                         this.shoot.x,
                         this.shoot.y,
-                        this.shoot.speedX * 0.4 + (Math.random() - 0.5) * 20,
-                        this.shoot.speedY * 0.4 + (Math.random() - 0.5) * 20
-                ))
+                        this.shoot.speedX * 0.4 + Math.cos(diffusionAngle) * diffusionSpeed,
+                        this.shoot.speedY * 0.4 + Math.sin(diffusionAngle) * diffusionSpeed
+                    ))
+            }
 
             this.shoot.toDelete = true
             this.toDelete = true
