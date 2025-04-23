@@ -26,11 +26,11 @@ Scene = function (selector) {
     function render() { // draw to screen here
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // objects.filter((obj) => {
-        objects.filter((obj) => {
-            obj.render(ctx)
+        objects.forEach((obj, index) => {
+            if (obj.toDelete)
+                return objects.splice(index, 1)
 
-            return !obj.toDelete
+            obj.render(ctx)
         })
 
         console.log(objects)
