@@ -33,5 +33,5 @@ Scene = function (selector) {
         })
     }
 
-    setInterval(render, 60)
+    setInterval(render, 80)
 }

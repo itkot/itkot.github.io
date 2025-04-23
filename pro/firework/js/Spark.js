@@ -5,6 +5,26 @@ Spark = function (startX, startY, speedX, speedY){
     this.speedY = speedY
     this.toDelete = false
 
+    const colors = [
+        '#FF355E',
+        '#FD5B78',
+        '#FF6037',
+        '#FF9966',
+        '#FF9933',
+        '#FFCC33',
+        '#FFFF66',
+        '#FFFF66',
+        '#CCFF00',
+        '#66FF66',
+        '#AAF0D1',
+        '#50BFE6',
+        '#FF6EFF',
+        '#EE34D2',
+        '#FF00CC',
+        '#FF00CC'
+    ]
+
+    this.currentColor = Math.floor((Math.random()*colors.length))
 
     this.render = function (ctx) {
         if (this.y > ctx.canvas.height)
@@ -13,7 +33,7 @@ Spark = function (startX, startY, speedX, speedY){
         if (this.toDelete)
             return;
 
-        ctx.strokeStyle = 'red'
+        ctx.strokeStyle = colors[this.currentColor]
         ctx.beginPath()
         ctx.moveTo(this.x, this.y)
 
