@@ -39,6 +39,7 @@ Spark = function (startX, startY, speedX, speedY){
 
         this.x = this.x + this.speedX
         this.y = this.y + this.speedY
+
         ctx.lineTo(this.x, this.y)
         ctx.stroke()
 

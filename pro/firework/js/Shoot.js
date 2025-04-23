@@ -4,10 +4,6 @@ Shoot = function (startX, startY, destinationX, destinationY) {
     const y = destinationY
 
     const distance = Math.sqrt(x*x + y*y)
-    console.log('general speed:' + distance)
-    console.log('x speed:' + x + ' y speed:' + y)
-    console.log('x ratio: ' + x/distance)
-    console.log('y ratio: ' + y/distance)
 
     const nSpeed = canvas.height*0.075
     const nY = nSpeed*(y/distance)
