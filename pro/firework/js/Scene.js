@@ -8,7 +8,6 @@ Scene = function (selector) {
     }
 
     this.addObject = function (object) {
-        console.log(objects)
         objects.push(object)
     }
 
@@ -32,8 +31,6 @@ Scene = function (selector) {
 
             obj.render(ctx)
         })
-
-        console.log(objects)
     }
 
     setInterval(render, 60)

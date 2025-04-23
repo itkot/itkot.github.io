@@ -30,10 +30,6 @@
         scene = new Scene('#canvas')
 
         scene.click(function (e) {
-            console.log('click: ' + e.layerX + ' - ' + e.layerY)
-            spark = new Spark(e.layerX, e.layerY, 0, 0)
-            scene.addObject(spark)
-
             corner = Math.round(Math.random())
             shoot = new Shoot(
                 corner*canvas.width,
@@ -43,8 +39,6 @@
                 this)
 
             scene.addObject(shoot)
-
-
         })
     </script>
 </html>
