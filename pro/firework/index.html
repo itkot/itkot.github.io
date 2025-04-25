@@ -15,6 +15,14 @@
         body{
             background-color: #003153;
         }
+
+        .headerTile{
+            font-family: "Lucida Console", Courier, monospace;
+            color: #66FF66;
+            width: 100%;
+            text-align: center;
+            margin-top: 150px;
+        }
     </style>
 
     <script src="js/Scene.js"></script>
@@ -23,7 +31,7 @@
 </head>
 
 <body>
-
+    <h2 class="headerTile">Fire Work Demo!</h2>
     <canvas id="canvas"></canvas>
 </body>
     <script>
@@ -35,10 +43,28 @@
                 corner*canvas.width,
                 canvas.height,
                 e.layerX - corner*canvas.width,
-                -(canvas.height-e.layerY),
-                this)
+                -(canvas.height-e.layerY)
+            )
 
             scene.addObject(shoot)
         })
+
+        demoLeftShoot = new Shoot(
+            0,
+            canvas.height,
+            canvas.width/2,
+            -canvas.height/1.5
+        )
+        demoRightShoot = new Shoot(
+            canvas.width,
+            canvas.height,
+            -canvas.width/2,
+            -canvas.height/1.5
+        )
+
+        scene.addObject(demoLeftShoot)
+        scene.addObject(demoRightShoot)
+
+
     </script>
 </html>

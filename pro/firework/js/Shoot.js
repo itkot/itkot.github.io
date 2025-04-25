@@ -21,7 +21,7 @@ Shoot = function (startX, startY, destinationX, destinationY) {
     this.render = function () {
         if (Math.abs(startX+destinationX - this.shoot.x) > distans){
 
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 200; i++) {
                 const diffusionAngle = Math.random()*6.28
                 const diffusionSpeed = Math.random()*12
 
