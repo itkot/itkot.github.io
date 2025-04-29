@@ -19,6 +19,8 @@ Shoot = function (startX, startY, destinationX, destinationY) {
     var distans = Math.abs(startX+destinationX - this.shoot.x)
 
     this.render = function () {
+        this.burstEngine(2)
+
         if (Math.abs(startX+destinationX - this.shoot.x) > distans){
 
             for (let i = 0; i < 200; i++) {
@@ -39,5 +41,13 @@ Shoot = function (startX, startY, destinationX, destinationY) {
         }
 
         distans = Math.abs(startX+destinationX - this.shoot.x)
+    }
+    
+    this.burstEngine = function (acceleration) {
+        const speed = Math.sqrt(this.shoot.speedX*this.shoot.speedX + this.shoot.speedY*this.shoot.speedY)
+
+
+        this.shoot.speedY = (speed + acceleration)*(y/distance)
+        this.shoot.speedX = (speed + acceleration)*(x/distance)
     }
 }
