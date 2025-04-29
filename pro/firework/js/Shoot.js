@@ -31,8 +31,8 @@ Shoot = function (startX, startY, destinationX, destinationY) {
                     new Spark(
                         this.shoot.x,
                         this.shoot.y,
-                        this.shoot.speedX * 0.4 + Math.cos(diffusionAngle) * diffusionSpeed,
-                        this.shoot.speedY * 0.4 + Math.sin(diffusionAngle) * diffusionSpeed
+                        this.shoot.speedX * 0.6 + Math.cos(diffusionAngle) * diffusionSpeed,
+                        this.shoot.speedY * 0.6 + Math.sin(diffusionAngle) * diffusionSpeed
                     ))
             }
 
@@ -46,8 +46,7 @@ Shoot = function (startX, startY, destinationX, destinationY) {
     this.burstEngine = function (acceleration) {
         const speed = Math.sqrt(this.shoot.speedX*this.shoot.speedX + this.shoot.speedY*this.shoot.speedY)
 
-
-        this.shoot.speedY = (speed + acceleration)*(y/distance)
-        this.shoot.speedX = (speed + acceleration)*(x/distance)
+        this.shoot.speedY = (speed + acceleration)*(this.shoot.speedY/speed)
+        this.shoot.speedX = (speed + acceleration)*(this.shoot.speedX/speed)
     }
 }

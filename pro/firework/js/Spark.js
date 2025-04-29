@@ -44,5 +44,16 @@ Spark = function (startX, startY, speedX, speedY){
         ctx.stroke()
 
         this.speedY = this.speedY + 2
+        this.windage()
+    }
+
+    this.windage = function () {
+        const speed = Math.sqrt(this.speedX*this.speedX + this.speedY*this.speedY)
+
+        const drugForce = speed*speed/800
+
+        if (speed > 5)
+            this.speedY = (speed-drugForce)*(this.speedY/speed)
+            this.speedX = (speed-drugForce)*(this.speedX/speed)
     }
 }
