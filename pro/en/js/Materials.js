@@ -20,17 +20,17 @@ Materials = new function() {
         var dictionary = {}
         var startTime = performance.now();
         var loadedParts = 0
-        for (let i = 1; i <= 100; i++) {
-            fetch('top10k/words/'+ i +'.json')
+        for (let i = 1; i <= 9; i++) {
+            fetch('top10k/wordsByThousands/'+ i +'.json')
                 .then((resp) =>
                     {
                         resp.json()
                             .then((jsonPart) => {
                                 loadedParts++;
-                                defaultProgressCallback(loadedParts)
+                                defaultProgressCallback(loadedParts/9 * 100)
                                 dictionary = Object.assign(dictionary, jsonPart);
 
-                                if (loadedParts == 100){
+                                if (loadedParts == 9){
                                     localStorage.setItem('top10kDictionary', JSON.stringify(dictionary))
 
                                     console.log(performance.now() - startTime)
@@ -40,35 +40,7 @@ Materials = new function() {
                     })
         }
 
-        //2,3,2,2,2
     }
 
-    async function loadWords(progressCallback, finishCallBack) {
-        var startTime = performance.now();
-        var dictionary = {}
 
-        for (let i = 1; i <= 100; i++) {
-            let part = await fetch('top10k/words/'+ i +'.json')
-            part = await part.json()
-            if (typeof progressCallback == 'function')
-                progressCallback(i)
-            defaultProgressCallback(i)
-
-            // console.log('====')
-            // console.log(part)
-            // console.log(dictionary)
-            //
-            // if (i == 3) break;
-
-
-            dictionary = Object.assign(dictionary, part);
-        }
-
-        localStorage.setItem('top10kDictionary', JSON.stringify(dictionary))
-
-        console.log(performance.now() - startTime)
-        finishCallBack(dictionary)
-
-        //4,8,4,4,4
-    }
 }

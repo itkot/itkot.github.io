@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Speed Test</title>
+</head>
+
+<script>
+    async function loadWords(progressCallback, finishCallBack) {
+        var startTime = performance.now();
+        var dictionary = {}
+
+        for (let i = 1; i <= 100; i++) {
+            let part = await fetch('words/'+ i +'.json')
+            part = await part.json()
+            if (typeof progressCallback == 'function')
+                progressCallback(i)
+
+
+
+            dictionary = Object.assign(dictionary, part);
+        }
+
+        localStorage.setItem('top10kDictionary', JSON.stringify(dictionary))
+
+        console.log(performance.now() - startTime)
+        finishCallBack(dictionary)
+
+        //4,8,4,4,4
+    }
+
+    async function loadWordsByThousands(progressCallback, finishCallBack) {
+        var startTime = performance.now();
+        var dictionary = {}
+
+        for (let i = 1; i <= 9; i++) {
+            let part = await fetch('wordsByThousands/'+ i +'.json')
+            part = await part.json()
+            if (typeof progressCallback == 'function')
+                progressCallback(i)
+
+            dictionary = Object.assign(dictionary, part);
+        }
+
+        localStorage.setItem('top10kDictionaryByThousands', JSON.stringify(dictionary))
+
+        console.log(performance.now() - startTime)
+        finishCallBack(dictionary)
+
+        //4,8,4,4,4
+    }
+
+    loadWords(
+        (progress) => {
+            // console.log(progress)
+        },
+        () => {
+            console.log('finish!')
+
+            loadWordsByThousands(
+                (progress) => {
+                    // console.log(progress)
+                },
+                () => {console.log('finish!')}
+            )
+        }
+    )
+
+
+</script>
+
+<body>
+<p>
+    words by hundred:<br>
+    <progress max="100" value="15" />
+</p>
+<p>
+    words by thousands:<br>
+    <progress max="100" value="10" />
+</p>
+
+
+</body>
+</html>

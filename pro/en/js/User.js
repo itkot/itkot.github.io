@@ -25,4 +25,8 @@ User = new function () {
 
         return loginPromice
     }
+
+    this.getName = function(){
+        return localStorage.getItem('userName')
+    }
 }

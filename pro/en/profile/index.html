@@ -10,9 +10,8 @@
 
 <div id="app" class="container">
     <div class="row justify-content-center ">
-        <div v-if="isLogin">
-            logined interface
-        </div>
+        <h1>{{userName}}</h1>
+        <small class="form-text text-muted">profile info:</small>
 
     </div>
 </div>
@@ -25,6 +24,15 @@
     if (!User.isLogin())
         window.location.href = Config.rootPath('login.html');
 
+    const app = Vue.createApp({
+        data() {
+            return {
+                userName: User.getName()
+            }
+        }
+    })
+
+    app.mount('#app')
 </script>
 
 </body>
