@@ -1,0 +1,6 @@
+{
+  "name": "en",
+  "version": "0.0.1",
+  "userBackEnds": ["http://w95109cz.beget.tech/"],
+  "rootPath": "/pro/en/"
+}

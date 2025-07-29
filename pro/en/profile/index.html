@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    <link href="../LocalDependencies/bootstrap@5.2.3.css" rel="stylesheet">
+    <script src="../LocalDependencies/bootstrap@5.2.3.js"></script>
+
+</head>
+<body>
+
+<div id="app" class="container">
+    <div class="row justify-content-center ">
+        <div v-if="isLogin">
+            logined interface
+        </div>
+
+    </div>
+</div>
+
+<script src="../js/Config.js"></script>
+<script src="../js/User.js"></script>
+<script src="../LocalDependencies/Vue.js"></script>
+<!--<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>-->
+<script >
+    if (!User.isLogin())
+        window.location.href = Config.rootPath('login.html');
+
+</script>
+
+</body>
+</html>

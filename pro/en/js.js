@@ -28,6 +28,24 @@ testInit = function () {
 
 
 
+
+
+    tests['puzzle'] = function () {
+        Materials.getTOP10K(function (words) {
+            keys = Object.keys(words).filter(word => word.length < 16)
+            word = keys[Math.random()*keys.length << 0]
+            translate = words[word].trs[words[word].trs.length * Math.random() << 0]
+
+
+            Puzzle.render(word, translate, '#test')
+            Puzzle.then(testInit)
+            Puzzle.successAction(UserProgress.addPoint)
+            Puzzle.failAction(UserProgress.fail)
+        })
+    }
+
+
+
     tests['couples'] = function () {
         Materials.getTOP10K(function (words) {
             var couples = {}
@@ -54,19 +72,6 @@ testInit = function () {
     }
 
 
-    tests['puzzle'] = function () {
-        Materials.getTOP10K(function (words) {
-            keys = Object.keys(words).filter(word => word.length < 16)
-            word = keys[Math.random()*keys.length << 0]
-            translate = words[word].trs[words[word].trs.length * Math.random() << 0]
-
-
-            Puzzle.render(word, translate, '#test')
-            Puzzle.then(testInit)
-            Puzzle.successAction(UserProgress.addPoint)
-            Puzzle.failAction(UserProgress.fail)
-        })
-    }
 
     function getRandomTest(tests){
         let keys = Object.keys(tests)

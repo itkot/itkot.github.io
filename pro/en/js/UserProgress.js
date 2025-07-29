@@ -10,6 +10,8 @@ UserProgress = new function () {
     if (series === null)
         series = 0
 
+    var avSeries = []
+
     const level = () => {
 
         console.log(Math.log2(1 + series*(2/scoreStep)))
@@ -22,6 +24,7 @@ UserProgress = new function () {
 
     this.addPoint = function () {
         console.log('adding point')
+        console.log(avSeries)
 
         localStorage.setItem('series', ++series)
 
@@ -32,6 +35,9 @@ UserProgress = new function () {
     }
 
     this.fail = function () {
+        avSeries.push(parseInt(series))
+        console.log(avSeries)
+
         series = 0
         localStorage.setItem('series', series)
         render()

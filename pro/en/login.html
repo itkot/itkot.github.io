@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    <link href="LocalDependencies/bootstrap@5.2.3.css" rel="stylesheet">
+    <script src="LocalDependencies/bootstrap@5.2.3.js"></script>
+
+</head>
+<body>
+
+<div id="app" class="container">
+    <div class="row justify-content-center ">
+        <form v-on:submit.prevent="onLogin">
+            <div class="form-group">
+                <label for="login">User name</label>
+                <input type="text" class="form-control" id="login" v-model="login"  aria-describedby="emailHelp" required>
+                <!--<small id="emailHelp" class="form-text text-muted">Enter your user name.</small>-->
+            </div>
+            <div class="form-group mt-3">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" v-model="password">
+            </div>
+                <!--<div class="form-group form-check">-->
+                <!--<input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+                <!--<label class="form-check-label" for="exampleCheck1">Check me out</label>-->
+                <!--</div>-->
+            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script src="js/Config.js"></script>
+<script src="js/User.js"></script>
+<script src="LocalDependencies/Vue.js"></script>
+<!--<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>-->
+<script >
+    const app = Vue.createApp({
+        data() {
+            return {
+                isLogin: User.isLogin(),
+            }
+        },
+        methods: {
+            onLogin(){
+                User.login(this.login, this.password)
+                    .then((result) => {
+                        console.log(result)
+
+                        if (result)
+                            window.location.href = Config.rootPath()
+                        else
+                            console.error('Authorisation failed')
+                    })
+            },
+        }
+    })
+    app.mount('#app')
+
+    console.log({
+        isLogin: User.isLogin(),
+    })
+</script>
+
+</body>
+</html>

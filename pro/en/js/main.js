@@ -42,3 +42,4 @@ window.addEventListener('appinstalled', () => {
 // Optionally, send analytics event to indicate successful install
 console.log('PWA was installed');
 });
+
